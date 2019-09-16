@@ -78,6 +78,14 @@ int& ListaCartas::getCartasRestantes()
 {
 	return this->cartasRestantes;
 }
+//este metodo recarga el mazo (por si quedan pocas cartas restantes)
+void ListaCartas::recargarMazo()
+{
+	for (int i = 0; i < cantMax; i++) {
+		posCartas[i] = i;
+	}
+	cartasRestantes = cantMax;
+}
 //La funcion rand() de cstdlib funciona con una "semilla" para generar valores aleatorios este metodo la actualizara
 void ListaCartas::resetearSemilla()
 {

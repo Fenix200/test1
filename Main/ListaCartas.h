@@ -13,12 +13,12 @@ class ListaCartas
 
 public:
 	ListaCartas();
-	string getCarta();//devuelve una carta aleatoria de las restantes*/
+	string getCarta();
 	int& getCartasRestantes();
-	void resetearSemilla();
+	void recargarMazo();
 
 private:
-
+	void resetearSemilla();
 	Card* cartasFijas;
 	int cantMax;
 	int* posCartas;
