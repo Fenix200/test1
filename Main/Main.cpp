@@ -19,11 +19,10 @@ int main()
 	*victorias = 5;
 	cout << jug->getVictorias();*/
 	ListaCartas* cartas = new ListaCartas();
-	int num = 0;
-	/*
-	while (num != -1) {
-		cout << cartas->getCarta()<<endl;
+
+	
+	for (int i = 0; i < 80; i++) {
+		cout << cartas->getCarta() << endl;
 		cout << "cartas restantes : " << cartas->getCartasRestantes() << endl;
-		cin >> num;
-	}*/
+	}
 }

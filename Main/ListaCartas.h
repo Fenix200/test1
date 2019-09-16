@@ -3,6 +3,9 @@
 #include "Card.h"
 #include <cstdlib>
 #include <ctime>
+#include <chrono>// librerias para dar pausas 
+#include <thread>// librerias para dar pausas 
+
 using namespace std;
 
 class ListaCartas
