@@ -4,7 +4,7 @@ class ClasePrueba
 public:
 	ClasePrueba();
 	ClasePrueba(int _dato);
-	int getDato();
+	int& getDato();
 
 private:
 	int dato;
