@@ -151,13 +151,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Administrador.cpp" />
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="ClasePrueba.cpp" />
     <ClCompile Include="Jugador.cpp" />
+    <ClCompile Include="ListaAdministradores.cpp" />
+    <ClCompile Include="ListaCartas.cpp" />
+    <ClCompile Include="ListaJugador.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Sistema.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Administrador.h" />
+    <ClInclude Include="Card.h" />
     <ClInclude Include="ClasePrueba.h" />
     <ClInclude Include="Jugador.h" />
+    <ClInclude Include="ListaAdministradores.h" />
+    <ClInclude Include="ListaCartas.h" />
+    <ClInclude Include="ListaJugador.h" />
+    <ClInclude Include="Sistema.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
