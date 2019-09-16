@@ -4,5 +4,6 @@ int main()
 {
 	ClasePrueba* prueba = new ClasePrueba(89);
 	//añadi comentario
+	//añadi otro comentario
 	std:: cout << prueba->getDato();
 }
