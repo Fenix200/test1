@@ -5,6 +5,7 @@
 
 using namespace std;
 int main()
+//este es el main by Michel
 {
 	ClasePrueba* prueba = new ClasePrueba(89);
 	//añadi comentario
