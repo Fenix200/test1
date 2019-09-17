@@ -1,6 +1,10 @@
 #include "Administrador.h"
 
 
+Administrador::Administrador()
+{
+}
+
 Administrador::Administrador(string rut, string password)
 {
 	this->rut = rut;

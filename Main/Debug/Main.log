@@ -1,3 +1,2 @@
-﻿  ListaCartas.cpp
-C:\Users\BorisSaez\source\repos\Fenix200\Test1Estructura\Main\ListaCartas.cpp(90,12): warning C4244:  'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-  Main.vcxproj -> C:\Users\BorisSaez\source\repos\Fenix200\Test1Estructura\Main\Debug\Main.exe
+﻿  ListaAdministradores.cpp
+  Main.vcxproj -> C:\Users\miche\source\repos\Fenix200\test1\Main\Debug\Main.exe

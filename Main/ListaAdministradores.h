@@ -1,4 +1,4 @@
-/*
+
 #pragma once
 #include "Administrador.h"
 #include <string>
@@ -21,5 +21,5 @@ private:
 
 
 
-};*/
+};
 

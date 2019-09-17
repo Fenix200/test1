@@ -1,4 +1,4 @@
-/*
+
 #include "ListaAdministradores.h"
 using namespace std;
 
@@ -33,6 +33,7 @@ bool ListaAdministradores::buscarAdministrador(string rut, string clave) {
 
 	}
 	return false;
-}*/
+}
+
 
 
