@@ -1,6 +1,7 @@
-
 /*
 #include "ListaAdministradores.h"
+using namespace std;
+
 
 
 
@@ -8,7 +9,8 @@ ListaAdministradores::ListaAdministradores() {
 	this->cantMax = 100;
 	this->cantActual = 0;
 	this->vectorAdministradores = new Administrador[cantMax];
-
+	 
+	
 
 }
 
@@ -31,5 +33,6 @@ bool ListaAdministradores::buscarAdministrador(string rut, string clave) {
 
 	}
 	return false;
-}
-*///da error
+}*/
+
+

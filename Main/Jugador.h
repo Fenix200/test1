@@ -8,7 +8,7 @@ class Jugador
 public:
 	Jugador(string nombre, string rut, int id);
 	Jugador();
-	std::string& getNombre();
+	string& getNombre();
 	string& getRut();
 	double& getSaldo();
 	int& getId();
@@ -19,8 +19,8 @@ public:
 
 
 private:
-	std::string rut;
-	std::string nombre;
+	string rut;
+	string nombre;
 	double saldo;
 	int id;
 	int victorias;

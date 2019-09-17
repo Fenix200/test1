@@ -1,4 +1,5 @@
-/*#pragma once
+/*
+#pragma once
 #include "Administrador.h"
 #include <string>
 using namespace std;
@@ -20,5 +21,5 @@ private:
 
 
 
-};*///da error
+};*/
 
