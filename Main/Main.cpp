@@ -9,7 +9,7 @@ int main()
 {
 	ClasePrueba* prueba = new ClasePrueba(89);
 	//añadi comentario
-	//añadi otro comentario
+	//añadi otro comentario 
 	std:: cout << prueba->getDato()<<endl;
 
 	Jugador* jug = new Jugador("juan", "194670", 5);

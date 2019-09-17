@@ -11,7 +11,7 @@ class ListaCartas
 
 public:
 	ListaCartas();
-	string getCarta();
+	string& getCarta();
 	int& getCartasRestantes();
 	void recargarMazo();
 

@@ -51,7 +51,7 @@ ListaCartas::ListaCartas()
 	resetearSemilla();
 }
 //Proporciona una carta aleatoria y luego la "Elimina"
-string ListaCartas::getCarta()
+string& ListaCartas::getCarta()
 {
 
 	//reseteare la semilla aleatoria cada 20 cartas repartidas
@@ -64,12 +64,12 @@ string ListaCartas::getCarta()
 	//obtengo una posicion aleatoria de las restantes en el posCartas
 	int posAleatoria = posCartas[num];
 	//obtengo el valor de la carta correspondiente a esa posicion
-	string carta = cartasFijas[posAleatoria].getNumero();
+	int posFinal = posAleatoria;
 	
 	//Descarto la posicion que salio intercambiandola con la ultima actual y le resto -1 a la cantidad actual
 	posCartas[posAleatoria] = posCartas[cartasRestantes];
 	cartasRestantes--;
-	return carta;
+	return cartasFijas[posFinal].getNumero();//retorna el valor de la carta por referencia (&)
 }
 
 int& ListaCartas::getCartasRestantes()
