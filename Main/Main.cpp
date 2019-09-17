@@ -19,10 +19,9 @@ int main()
 	*victorias = 5;
 	cout << jug->getVictorias();*/
 	
-	/*//preguntar porque si se ejecuta ese codigo da error
 	ListaCartas* cartas = new ListaCartas();
 	for (int i = 0; i < 80; i++) {
 		cout << cartas->getCarta() << endl;
 		cout << "cartas restantes : " << cartas->getCartasRestantes() << endl;
-	}*/
+	}
 }

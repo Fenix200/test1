@@ -45,22 +45,20 @@ ListaCartas::ListaCartas()
 		posCartas[cartas] = cartas;
 		cartas++;
 	}
-
-	this->cartasRestantes = cartas;
+	//se le resta 1 ya que la variable cartas restantes se utiliza para ir buscando cartas
+	//y el vector cartas va desde 0 a 103(104-1 =103)
+	this->cartasRestantes = cartas-1;
 	resetearSemilla();
 }
 //Proporciona una carta aleatoria y luego la "Elimina"
 string ListaCartas::getCarta()
 {
-	//resulta que si pedias cartas muy rapido se bugeaba asi que dare una pausa de 250 milisegundos cada vez que se pida una carta
-	std::chrono::duration<int, std::milli> timespan(250);
-	std::this_thread::sleep_for(timespan);
 
 	//reseteare la semilla aleatoria cada 20 cartas repartidas
 	if (cartasRestantes % 20 == 0) {
 		resetearSemilla();
 	}
-
+		
 	//primero busco un numero aleatorio entre 0 y la cant actual de cartas
 	int num = rand() % cartasRestantes;
 	//obtengo una posicion aleatoria de las restantes en el posCartas
