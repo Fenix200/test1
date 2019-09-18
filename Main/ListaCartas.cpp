@@ -50,6 +50,8 @@ ListaCartas::ListaCartas()
 	this->cartasRestantes = cartas-1;
 	resetearSemilla();
 }
+
+
 //Proporciona una carta aleatoria y luego la "Elimina"
 string& ListaCartas::getCarta()
 {
@@ -82,7 +84,7 @@ void ListaCartas::recargarMazo()
 	for (int i = 0; i < cantMax; i++) {
 		posCartas[i] = i;
 	}
-	cartasRestantes = cantMax;
+	cartasRestantes = cantMax-1;
 }
 //La funcion rand() de cstdlib funciona con una "semilla" para generar valores aleatorios este metodo la actualizara
 void ListaCartas::resetearSemilla()
