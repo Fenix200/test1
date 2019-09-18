@@ -1,5 +1,6 @@
-/*#pragma once
+#pragma once
 #include "Jugador.h"
+
 #include <string>
 using namespace std;
 
@@ -17,6 +18,5 @@ private:
 	Jugador* vectorJugadores;
 	int cantActual;
 	int cantMax;
+	int idGlobal;
 };
-*///da error
-

@@ -1,4 +1,5 @@
-/*#include "ListaJugador.h"
+#include "ListaJugador.h"
+
 
 ListaJugador::ListaJugador() {
 	this->cantMax = 100;
@@ -29,5 +30,4 @@ Jugador& ListaJugador::getJugador(string rut) {
 	}
 	return vectorJugadores[0];
 
-}*///da error
-
+}

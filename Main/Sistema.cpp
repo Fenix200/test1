@@ -1,8 +1,16 @@
-/*#include "Sistema.h"
+#include "Sistema.h"
 
 Sistema::Sistema()
 {
 //nada aun
+}
+void Sistema::setUltimaIdPersona(int id)
+{
+	
+	id++;
+	this->idActualPersona = id;
+
+	
 }
 //metodo para ejecutar sistema
 void Sistema::ejecutarSistema()
@@ -15,40 +23,34 @@ void Sistema::ejecutarSistema()
 		ingreso_0 = verificadorIngreso(3);
 		switch (ingreso_0)
 		{
-		case 1:
-			int ingreso_1 = -1;
-			while (ingreso_1 == -1) 
-			{
-				printMenus(1);
-				ingreso_1 = verificadorIngreso(4);
-				if (ingreso_1 != -1) {
-					//aca ira Jugar0
-				}
-			}
+		case 1: {
+
+			printMenus(1);
+			int ingreso_1 = verificadorIngreso(4);
+			//aca ira Jugar0	
+
 			break;
 
+		}
+		case 2: {
+			//Aca ira onFire0
 
-		case 2:
 			break;
-		case 3:
-			int ingreso_3 = -1;
-			while (ingreso_3 == -1)
-			{
-				printMenus(3);
-				ingreso_3 = verificadorIngreso(4);
-				if (ingreso_3 != -1) {
-					//aca ira Registrar0
-				}
-			}
+		}
+		case 3: {
+
+			printMenus(3);
+			int ingreso_3 = verificadorIngreso(4);
+			//aca ira Registrar0
 			break;
+		}
 		default:
 			break;
 		}
-	
-		getchar();
-
 	}
 }
+
+
 //recibe un float que corresponde a un menu especifico y lo imprime
 void Sistema::printMenus(float imprimir)
 {	//menu principal
@@ -86,22 +88,24 @@ void Sistema::printMenus(float imprimir)
 	}
 
 }
-//retorna -1 a no ser que se ingrese una opcion entre 1 a max (1 incluido) en ese caso retorna el valor ingresado
+//pregunta hasta que se ingrese un valor valido
 int Sistema::verificadorIngreso(int max)
 {
-	int opcion = -1;
-	try {
+	while (true) {
+		int opcion;
+
 		cin >> opcion;
-		if (opcion <= max && opcion >= 1) {
+		if (!cin) {
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cout << "Opcion no valida ingresa Numero!" << endl;
+		}
+		else if (opcion <= max && opcion >= 1) {
 			return opcion;
 		}
-		cout << "Opcion no Valida Ingrese Numero de la lista!" << endl;
-		return -1;
-	}
-	catch (...) {
-		cout << "Opcion no Valida Ingrese Numero de la lista!" << endl;
-		return -1;
+		else {
+			cout << "Opcion no valida" << endl;
+		}
 	}
 }
 
-*/

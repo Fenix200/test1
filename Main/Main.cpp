@@ -3,6 +3,7 @@
 #include "Jugador.h"
 #include "ListaCartas.h"
 #include <string>
+#include "Sistema.h"
 
 using namespace std;
 int main()
@@ -29,7 +30,8 @@ int main()
 		cout << "cartas restantes : " << cartas->getCartasRestantes() << endl;
 	}*/
 
-	Jugador* jug = new Jugador("Juan", "19467", 0);
+	Jugador* jug = new Jugador("Juan", "19467",0);
+	Jugador* jug2 = new Jugador("Juan2", "19467",1);
 
 	string carta1 = "K";
 	string carta2 = "A";
@@ -41,4 +43,10 @@ int main()
 	jug->ingresarCarta(carta2);
 	jug->ingresarCarta(carta1);
 	cout << jug->suma() << endl;
+	Sistema* sis = new Sistema();
+
+	cout << jug->getId();
+	cout << jug2->getId();
+
+
 }

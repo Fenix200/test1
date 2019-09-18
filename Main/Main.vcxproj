@@ -154,6 +154,7 @@
     <ClCompile Include="Administrador.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="ClasePrueba.cpp" />
+    <ClCompile Include="GetId.cpp" />
     <ClCompile Include="Jugador.cpp" />
     <ClCompile Include="ListaAdministradores.cpp" />
     <ClCompile Include="ListaCartas.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Administrador.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="ClasePrueba.h" />
+    <ClInclude Include="GetId.h" />
     <ClInclude Include="Jugador.h" />
     <ClInclude Include="ListaAdministradores.h" />
     <ClInclude Include="ListaCartas.h" />

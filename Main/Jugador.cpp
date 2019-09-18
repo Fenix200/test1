@@ -1,5 +1,6 @@
 #include "Jugador.h"
 
+
 Jugador::Jugador(string nombre, string rut, int id)
 {
 	this->nombre = nombre;
@@ -53,6 +54,10 @@ void Jugador::setNombre(string nombreNuevo)
 	this->nombre = nombreNuevo;
 }
 
+void Jugador::agregarSaldo(double saldoAgregado)
+{
+	this->saldo += saldoAgregado;
+}
 void Jugador::setSaldo(double saldoNuevo)
 {
 	this->saldo = saldoNuevo;
