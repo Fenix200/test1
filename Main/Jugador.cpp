@@ -77,7 +77,7 @@ void Jugador::vaciarCartas()
 	this->cantActualcartas = 0;
 }
 
-//Metodo que suma las cartas del jugador tomando en cuenta que valor del A a conveniencia
+//Metodo que suma las cartas del jugador tomando en cuenta que valor del A a conveniencia y retorna -1 si es mayor a 21
 int Jugador::suma(){
 	int suma = 0;
 	for (int i =0; i <cantActualcartas; i++){
@@ -93,25 +93,26 @@ int Jugador::suma(){
 			{
 				suma += 10;
 			}
-			else
-			{
-				if((suma+11)<=21){
-					suma += 11;
-				}
-				else if((suma+1)<=21){
-					suma += 1;
-				}
-				else{
-					return -1;
-				}
-				
 
-			}//cierre 2 else
-	
-
-		
 		}//cierre else	
 	}//for
+	//Este For revisa Las As
+	for (int i = 0; i < cantActualcartas; i++)
+	{
+		if((*vecCartas_ptr[i]).compare("A") == 0)
+		{
+			if ((suma + 11) <= 21) {
+				suma += 11;
+			}
+			else if ((suma + 1) <= 21) {
+				suma += 1;
+			}
+			else {
+				return -1;
+			}
+		}
+	}
+
 
 	if (suma <= 21) {
 		return suma;
