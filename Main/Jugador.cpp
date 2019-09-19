@@ -82,6 +82,16 @@ void Jugador::vaciarCartas()
 	this->cantActualcartas = 0;
 }
 
+string* Jugador::getListaCartas()
+{
+	string* lista = new string[cantActualcartas];
+	for (int i = 0; i < cantActualcartas; i++) {
+		lista[i] = *vecCartas_ptr[i];
+	}
+
+	return lista;
+}
+
 //Metodo que suma las cartas del jugador tomando en cuenta que valor del A a conveniencia y retorna -1 si es mayor a 21
 int Jugador::suma(){
 	int suma = 0;

@@ -13,6 +13,7 @@ public:
 	void setUltimaIdPersona(int id);
 	void ejecutarSistema();
 	void printCarta(string carta);
+	void printCarta2(Jugador* jug);
 
 private:
 

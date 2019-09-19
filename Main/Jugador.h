@@ -21,6 +21,7 @@ public:
 	void addVictoria();
 	void ingresarCarta(string &valorCarta);
 	void vaciarCartas();
+	string* getListaCartas();
 	
 
 

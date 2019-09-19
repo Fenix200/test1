@@ -41,6 +41,21 @@ int main()
 	cout << jug[0]->getRut();
 
 	Sistema* sis = new Sistema();
-	sis->printCarta("10");
-	sis->printCarta("A");
+	string Cs[2] = { "A","10" };
+	int cantidad = 2;
+	string C = "**";
+
+
+
+	cout << "hola\n" << endl;
+
+	Jugador* juga = new Jugador("Juan", "19467", 0);
+	string carta1 = "A";
+	string carta2 = "10";
+	string carta3 = "K";
+	juga->ingresarCarta(carta1);
+	juga->ingresarCarta(carta2);
+	juga->ingresarCarta(carta3);
+
+	sis->printCarta2(juga);
 }

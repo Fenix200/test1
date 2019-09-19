@@ -243,3 +243,75 @@ void Sistema::printCarta(string carta)
 	}
 }
 
+void Sistema::printCarta2(Jugador* jug)
+{
+	if (jug->getCantidadCartasActuales() == 0) {
+		return;
+	}
+	
+	int cantidad = jug->getCantidadCartasActuales();
+	string C = "**";
+
+	cout << endl;
+	for (int i = 0; i < cantidad; i++) {
+		cout << " _________ ";
+		if (i == cantidad - 1) {
+			cout << endl;
+		}
+	}
+	for (int i = 0; i < cantidad; i++) {
+		C = jug->getListaCartas()[i];
+		if (C.compare("10") != 0) {
+			cout << "|" << C << "        |";
+		}
+		else {
+			cout << "|" << C << "       |";
+		}
+		if (i == cantidad - 1) {
+			cout << endl;
+		}
+	}
+	for (int i = 0; i < cantidad; i++) {
+		cout << "|         |";
+		if (i == cantidad - 1) {
+			cout << endl;
+		}
+	}
+	for (int i = 0; i < cantidad; i++) {
+		cout << "|         |";
+		if (i == cantidad - 1) {
+			cout << endl;
+		}
+	}
+	for (int i = 0; i < cantidad; i++) {
+		cout << "|   UCN   |";
+		if (i == cantidad - 1) {
+			cout << endl;
+		}
+	}
+	for (int i = 0; i < cantidad; i++) {
+		cout << "|         |";
+		if (i == cantidad - 1) {
+			cout << endl;
+		}
+	}
+	for (int i = 0; i < cantidad; i++) {
+		cout << "|         |";
+		if (i == cantidad - 1) {
+			cout << endl;
+		}
+	}
+	for (int i = 0; i < cantidad; i++) {
+		C = jug->getListaCartas()[i];
+		if (C.compare("10") != 0) {
+			cout << "|________" << C << "|";
+		}
+		else {
+			cout << "|_______" << C << "|";
+		}
+		if (i == cantidad - 1) {
+			cout << endl;
+		}
+	}
+}
+
