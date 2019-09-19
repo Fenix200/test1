@@ -3,8 +3,7 @@
 //Este construtor llena los mazos de cartas
 ListaCartas::ListaCartas()
 {
-	//int pinta = 0; //valor se mueve entre 0 y sirve para darles pintas a las cartas :D
-	//string pintas[4] = 
+
 	int cartas = 0;//solo sirve para ir contando las cartas llenadas y llenar el vector de posiciones
 	int mazos = 2;//aca se puede establecer la cantidad de mazos con los que se jugara
 	cantMax = 52*mazos;//establece que habran 104 cartas 52*2 = 104

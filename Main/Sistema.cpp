@@ -31,13 +31,15 @@ void Sistema::ejecutarSistema()
 		{
 		case 1: {
 
-			printMenus(1);
-			int ingreso_1 = verificadorIngreso(4);
 			jugadoresJugando = 0;
 			//cuando jugadores jugando sea -1 es por que termino partida
-			while(jugadoresJugando!=-1){
+
+			//while(jugadoresJugando!=-1){
+			printMenus(1);
+			int ingreso_1 = verificadorIngreso(4);
 			//aca ira iniciarPartida	
-			}
+			//}
+
 			break;
 
 		}
@@ -228,5 +230,16 @@ void Sistema::isCartas()
 		listaCartas->recargarMazo();
 	}
 
+}
+
+void Sistema::printCarta(string carta)
+{
+	string C = carta;
+	if (C.compare("10") != 0) {
+		cout << "\n _________\n|" << C << "        |\n|         |\n|         |\n|   UCN   |\n|         |\n|         |\n|________" << C << "|";
+	}
+	else {
+		cout << "\n _________\n|" << C << "       |\n|         |\n|         |\n|   UCN   |\n|         |\n|         |\n|_______" << C << "|";
+	}
 }
 

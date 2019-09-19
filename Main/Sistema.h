@@ -12,7 +12,7 @@ public:
 	Sistema();
 	void setUltimaIdPersona(int id);
 	void ejecutarSistema();
-
+	void printCarta(string carta);
 
 private:
 
@@ -26,4 +26,5 @@ private:
 	Jugador* crupier;
 	ListaCartas* listaCartas;
 	void isCartas();//revisa si hay cartas suficientes para jugar si nos las hay revuelve el mazo
+	
 };

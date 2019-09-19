@@ -40,10 +40,7 @@ int main()
 
 	cout << jug[0]->getRut();
 
-	string L = "K";//letra
-
-	cout << "\n _______________" << endl;
-	cout << "|" << L << "		|" << endl;
-	cout << "|" << " " << "		|" << endl;
-	cout << "|" << " " << "		|" << endl;
+	Sistema* sis = new Sistema();
+	sis->printCarta("10");
+	sis->printCarta("A");
 }
