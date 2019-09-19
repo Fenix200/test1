@@ -29,24 +29,21 @@ int main()
 		cout << cartas->getCarta() << endl;
 		cout << "cartas restantes : " << cartas->getCartasRestantes() << endl;
 	}*/
+	
+	ListaJugador* lJ = new ListaJugador();
+	lJ->agregarJugador("Juan", "19467", 0);
+	lJ->agregarJugador("Juan2", "194673", 1);
+	
+	Jugador** jug = new Jugador*[3];
 
-	Jugador* jug = new Jugador("Juan", "19467",0);
-	Jugador* jug2 = new Jugador("Juan2", "19467",1);
+	jug[0] = &(lJ->getJugador("19467"));
 
-	string carta1 = "K";
-	string carta2 = "A";
-	string carta3 = "7";
-	jug->ingresarCarta(carta2);
-	jug->ingresarCarta(carta2);
-	jug->ingresarCarta(carta2);
-	jug->ingresarCarta(carta3);
-	jug->ingresarCarta(carta2);
-	jug->ingresarCarta(carta1);
-	cout << jug->suma() << endl;
-	Sistema* sis = new Sistema();
+	cout << jug[0]->getRut();
 
-	cout << jug->getId();
-	cout << jug2->getId();
+	string L = "K";//letra
 
-
+	cout << "\n _______________" << endl;
+	cout << "|" << L << "		|" << endl;
+	cout << "|" << " " << "		|" << endl;
+	cout << "|" << " " << "		|" << endl;
 }

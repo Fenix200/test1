@@ -42,9 +42,6 @@
     <ClCompile Include="ListaJugador.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GetId.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClasePrueba.h">
@@ -69,9 +66,6 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="ListaJugador.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="GetId.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

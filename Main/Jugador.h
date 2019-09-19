@@ -6,7 +6,6 @@ using namespace std;
 class Jugador
 {
 public:
-	Jugador(string nombre, string rut);
 	Jugador(string nombre, string rut, int id);
 	Jugador();
 	string& getNombre();

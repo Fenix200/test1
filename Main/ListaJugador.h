@@ -9,8 +9,9 @@ class ListaJugador
 
 public:
 	ListaJugador();
-	bool agregarJugador(Jugador&);
+	bool agregarJugador(string nombre, string rut, int id);
 	Jugador& getJugador(string rut);
+	int buscarJugador(string rut);
 
 
 private:

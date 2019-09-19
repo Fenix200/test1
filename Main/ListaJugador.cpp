@@ -8,10 +8,11 @@ ListaJugador::ListaJugador() {
 	this->vectorJugadores[0] = Jugador("NULL", "-9999", -9999);
 
 }
-
-bool ListaJugador::agregarJugador(Jugador& jg) {
+//añade un nuevo jugador
+bool ListaJugador::agregarJugador(string nombre, string rut, int id) {
+	Jugador* jg = new Jugador(nombre, rut, id);
 	if (cantActual < cantMax) {
-		vectorJugadores[cantActual] = jg;
+		vectorJugadores[cantActual] = *jg;
 		cantActual++;
 		return true;
 	}
@@ -30,4 +31,15 @@ Jugador& ListaJugador::getJugador(string rut) {
 	}
 	return vectorJugadores[0];
 
+}
+//metodo que retorna la posicion de un jugador dado un rut sino lo encuentra retorna -1
+int ListaJugador::buscarJugador(string rut)
+{
+	for (int i = 0; i < cantActual; i++) {
+		if (rut.compare(vectorJugadores[i].getRut()) == 0) {
+			return i;
+		}
+	}
+
+	return -1;
 }

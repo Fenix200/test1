@@ -2,7 +2,13 @@
 
 Sistema::Sistema()
 {
-//nada aun
+	listaJugadores = new ListaJugador();
+	jugadoresJugando = 0;
+	jugadoresMesa_ptr = new Jugador*[6];
+	//Crupier es un "jugador" en este caso la posicion 0 de la lista jugador
+	crupier = &(listaJugadores->getJugador("-9999"));
+	listaCartas = new ListaCartas();
+
 }
 void Sistema::setUltimaIdPersona(int id)
 {
@@ -27,8 +33,11 @@ void Sistema::ejecutarSistema()
 
 			printMenus(1);
 			int ingreso_1 = verificadorIngreso(4);
-			//aca ira Jugar0	
-
+			jugadoresJugando = 0;
+			//cuando jugadores jugando sea -1 es por que termino partida
+			while(jugadoresJugando!=-1){
+			//aca ira iniciarPartida	
+			}
 			break;
 
 		}
@@ -107,5 +116,117 @@ int Sistema::verificadorIngreso(int max)
 			cout << "Opcion no valida" << endl;
 		}
 	}
+}
+
+void Sistema::iniciarPartida(int opcion)
+{
+	switch (opcion)
+	{
+	case 1: {
+		if (jugadoresJugando == 0) {
+			cout << "Mesa Vacia" << endl;
+			break;
+		}
+		isCartas();
+
+		break;
+
+	}
+	//agregar jugador
+	case 2:
+	{
+		system("cls");
+		if (jugadoresJugando > 6) {
+			cout << "Mesa LLena" << endl;
+			break;
+		}
+		
+		string rut = "";
+		string id = "";
+		string nombre = "";
+
+		cout << "Ingrese RUT : " << endl;
+		getline(cin, rut);
+		cout << "Ingrese ID : " << endl;
+		getline(cin, id);
+		cout << "Ingrese NOMBRE : " << endl;
+		getline(cin, nombre);
+		if(listaJugadores->buscarJugador(rut) != -1){
+			bool existeNombre = listaJugadores->getJugador(rut).getNombre().compare(nombre) == 0;
+			bool existeId = to_string(listaJugadores->getJugador(rut).getId()).compare(id) == 0;
+			bool existeSaldo = listaJugadores->getJugador(rut).getSaldo() > 5000;
+			if (!existeId || !existeNombre || !existeSaldo) {
+				system("cls");
+				cout << "Jugador No puede Ser Agregado... Revise Saldo" << endl;
+				break;
+			}
+			//almaceno la direccion de jugador
+			jugadoresMesa_ptr[jugadoresJugando] = &(listaJugadores->getJugador(rut));
+			jugadoresJugando++;
+			break;
+
+		}
+		else {
+			cout <<  "\nRut No encontrado..." << endl;
+		}
+
+		break;
+	}
+	//eliminar Jugador
+	case 3:
+	{
+		system("cls");
+		if (jugadoresJugando == 0) {
+			cout << "Nadie para eliminar D:" << endl;
+			break;
+		}
+		else if (jugadoresJugando == 1) {
+			cout << "La mesa no se puede quedar sin nadie Termine partida" << endl;
+			break;
+		}
+		string rut = "";
+		cout << "Ingrese RUT : " << endl;
+		getline(cin, rut);
+		//Buscar Jugador en meza
+		int pos = -1;
+		for (int i = 0; i < jugadoresJugando; i++) {
+			if ((jugadoresMesa_ptr[i]->getRut().compare(rut) == 0)) {
+				pos = i;
+			}
+		}
+		if (pos == -1) {
+			cout << "Nadie para eliminar D:" << endl;
+			break;
+		}
+		//ahora si se encontro un jugador en mesa
+		jugadoresMesa_ptr[pos] = jugadoresMesa_ptr[jugadoresJugando];
+		jugadoresJugando--;
+
+		break;
+	}
+	case 4:
+	{
+		jugadoresJugando = -1;
+		break;
+	}
+
+	default:
+		break;
+	}
+
+
+}
+
+void Sistema::isCartas()
+{
+	
+	int cartas = (listaCartas->getCartasTotales())*(15/26);
+	int cartasRestantes = listaCartas->getCartasRestantes();
+	if (cartasRestantes <= cartas) {
+		system("cls");
+		cout << "Se revolvio el Mazo :D" << endl;
+		listaCartas->recargarMazo();
+	}
+
 }
 

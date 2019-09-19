@@ -14,6 +14,7 @@ public:
 	string& getCarta();
 	int& getCartasRestantes();
 	void recargarMazo();
+	int& getCartasTotales();
 
 private:
 	void resetearSemilla();
