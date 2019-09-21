@@ -28,7 +28,7 @@ int main()
 		}
 		cout << cartas->getCarta() << endl;
 		cout << "cartas restantes : " << cartas->getCartasRestantes() << endl;
-	}*/
+		}*///hola
 	
 	ListaJugador* lJ = new ListaJugador();
 	lJ->agregarJugador("Juan", "19467", 0);
@@ -55,7 +55,12 @@ int main()
 	string carta3 = "K";
 	juga->ingresarCarta(carta1);
 	juga->ingresarCarta(carta2);
-	juga->ingresarCarta(carta3);
+	
 
+	sis->printCarta2(juga);
+	juga->ingresarCarta(carta3);
+	getchar();
+	system("cls");
+	sis->printCarta2(juga);
 	sis->printCarta2(juga);
 }
