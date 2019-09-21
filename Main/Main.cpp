@@ -5,6 +5,10 @@
 #include <string>
 #include "Sistema.h"
 
+void suma(int hola) {
+	cout << 5 + hola<<endl;
+}
+
 using namespace std;
 int main()
 //este es el main by Michel
@@ -55,12 +59,8 @@ int main()
 	string carta3 = "K";
 	juga->ingresarCarta(carta1);
 	juga->ingresarCarta(carta2);
+
+	sis->ejecutarSistema();
 	
 
-	sis->printCarta2(juga);
-	juga->ingresarCarta(carta3);
-	getchar();
-	system("cls");
-	sis->printCarta2(juga);
-	sis->printCarta2(juga);
 }

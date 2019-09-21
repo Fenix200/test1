@@ -32,6 +32,10 @@ Jugador& ListaJugador::getJugador(string rut) {
 	return vectorJugadores[0];
 
 }
+Jugador& ListaJugador::getJugador(int posicion)
+{
+	return vectorJugadores[posicion];
+}
 //metodo que retorna la posicion de un jugador dado un rut sino lo encuentra retorna -1
 int ListaJugador::buscarJugador(string rut)
 {
@@ -42,4 +46,16 @@ int ListaJugador::buscarJugador(string rut)
 	}
 
 	return -1;
+}
+
+int& ListaJugador::getCantActual()
+{
+	return cantActual;
+}
+
+void ListaJugador::quitarCartasJugadores()
+{
+	for (int i = 0; i < cantActual; i++) {
+		vectorJugadores[i].vaciarCartas();
+	}
 }

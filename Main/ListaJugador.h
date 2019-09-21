@@ -11,7 +11,10 @@ public:
 	ListaJugador();
 	bool agregarJugador(string nombre, string rut, int id);
 	Jugador& getJugador(string rut);
+	Jugador& getJugador(int posicion);
 	int buscarJugador(string rut);
+	int& getCantActual();
+	void quitarCartasJugadores();//les quita las cartas a los jugadores
 
 
 private:
