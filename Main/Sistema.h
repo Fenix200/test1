@@ -16,6 +16,7 @@ public:
 	Sistema();
 	void setUltimaIdPersona(int id);
 	void ejecutarSistema();
+	void printCarta(Jugador* jug);
 
 private:
 
@@ -30,7 +31,6 @@ private:
 	ListaCartas* listaCartas;
 	void isCartas();//revisa si hay cartas suficientes para jugar si nos las hay revuelve el mazo
 	void repartirA(Jugador* jugador_ptr);//reparte una carta de la lista de cartas a la direccion de jugador ingresado
-	void printCarta(Jugador* jug);
 	void jugar();
 	
 	

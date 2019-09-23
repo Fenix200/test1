@@ -59,8 +59,9 @@ int main()
 	string carta3 = "K";
 	juga->ingresarCarta(carta1);
 	juga->ingresarCarta(carta2);
-
-	sis->ejecutarSistema();
+	juga->ingresarCarta(carta3);
+	
+	sis->printCarta(juga);
 	
 
 }

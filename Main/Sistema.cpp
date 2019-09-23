@@ -450,7 +450,7 @@ void Sistema::printCarta(Jugador* jug)
 		}
 	}
 	for (int i = 0; i < cantidad; i++) {
-		C = jug->getListaCartas()[i];
+		C = *jug->getListaCartas2()[i];
 		if (C.compare("10") != 0) {
 			cout << "|" << C << "        |";
 		}
@@ -493,7 +493,7 @@ void Sistema::printCarta(Jugador* jug)
 		}
 	}
 	for (int i = 0; i < cantidad; i++) {
-		C = jug->getListaCartas()[i];
+		C = *jug->getListaCartas2()[i];
 		if (C.compare("10") != 0) {
 			cout << "|________" << C << "|";
 		}
