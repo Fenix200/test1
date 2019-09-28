@@ -32,6 +32,7 @@ Jugador& ListaJugador::getJugador(string rut) {
 	return vectorJugadores[0];
 
 }
+//retorna por posicion recordar que posicion 1 es el crupier
 Jugador& ListaJugador::getJugador(int posicion)
 {
 	return vectorJugadores[posicion];

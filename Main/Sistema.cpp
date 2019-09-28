@@ -21,6 +21,14 @@ void Sistema::setUltimaIdPersona(int id)
 //metodo para ejecutar sistema
 void Sistema::ejecutarSistema()
 {
+	listaJugadores->agregarJugador("juan", "19467", 0);
+	listaJugadores->agregarJugador("pedro", "19467", 1);
+	listaJugadores->agregarJugador("diego", "19467", 2);
+	listaJugadores->agregarJugador("pablo", "19467", 3);
+	listaJugadores->getJugador(1).setSaldo(10000);
+	listaJugadores->getJugador(2).setSaldo(10000);
+	listaJugadores->getJugador(3).setSaldo(10000);
+	listaJugadores->getJugador(4).setSaldo(10000);
 	int ingreso_0 = -1;
 
 	//En el taller no indica que exista una opcion salir asi que while true
@@ -45,6 +53,7 @@ void Sistema::ejecutarSistema()
 		}
 		case 2: {
 			//Aca ira onFire0
+			jugadoresOnfire();
 
 			break;
 		}
@@ -126,7 +135,7 @@ void Sistema::iniciarPartida(int opcion)
 	{
 	case 1: {
 		if (jugadoresJugando == 0) {
-			cout << "Mesa Vacia O jugadores sin saldo" << endl;
+			cout << "Mesa Vacia o jugadores sin saldo" << endl;
 			cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
 			cin.ignore();
 			getchar();
@@ -165,12 +174,31 @@ void Sistema::iniciarPartida(int opcion)
 			bool existeNombre = listaJugadores->getJugador(rut).getNombre().compare(nombre) == 0;
 			bool existeId = to_string(listaJugadores->getJugador(rut).getId()).compare(id) == 0;
 			bool existeSaldo = listaJugadores->getJugador(rut).getSaldo() > 5000;
-			if (!existeId || !existeNombre || !existeSaldo) {
+			bool jugando = false;
+			for (int a = 0; a < jugadoresJugando; a++) {
+				if (0==id.compare(to_string(jugadoresMesa_ptr[a]->getId()))) {
+					jugando = true;
+					break;
+				}
+			}
+			if (!existeId || !existeNombre || !existeSaldo || jugando) {
 				system("cls");
-				cout << "Jugador No puede Ser Agregado... Revise Saldo" << endl;
+				if (!existeSaldo) {
+					cout << "Jugador No puede Ser Agregado... Revise Saldo" << endl;
+				}
+				if (jugando) {
+					cout << "Jugador No puede Ser Agregado... ya jugando" << endl;
+				}
+				if (!existeNombre) {
+					cout << "Jugador No puede Ser Agregado... nombre incorrecto" << endl;
+				}
+				if (!existeId) {
+					cout << "Jugador No puede Ser Agregado... id incorrecta" << endl;
+				}
 				cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
-				cin.ignore();
 				getchar();
+				cin.ignore();
+
 				break;
 			}
 			//almaceno la direccion de jugador
@@ -365,7 +393,7 @@ void Sistema::jugar()
 			}
 	
 			if (opcion == 3) {
-				jugadoresMesa_ptr[i]->setSaldo((jugadoresMesa_ptr[i]->getSaldo()) - (apuestas[i]/2));
+				jugadoresMesa_ptr[i]->setSaldo((jugadoresMesa_ptr[i]->getSaldo()) + (apuestas[i]/2));
 				retirados[i] = 2;
 				break;
 			}
@@ -406,20 +434,30 @@ void Sistema::jugar()
 
 	for (int i = 0; i < jugadoresJugando; i++) {
 		system("cls");
+
+
 		if (retirados[i] == 2) {
-			cout << jugadoresMesa_ptr[i]->getNombre() << " SE RETIRO y recupera la mitad =  " << (apuestas[i] / 2) << endl;
+			double saldo = (apuestas[i] / 2);
+			cout << jugadoresMesa_ptr[i]->getNombre() << " SE RETIRO y recupera la mitad =  " << saldo << endl;
+		
 			//nada;
 		}
-		else if (crupier->suma() >= jugadoresMesa_ptr[i]->suma() && blackJacks[i] != 1) {
+		else if (crupier->suma() == jugadoresMesa_ptr[i]->suma() && retirados[i] != 1) {
+			jugadoresMesa_ptr[i]->agregarSaldo((apuestas[i]));
+			cout << jugadoresMesa_ptr[i]->getNombre() << " EMPATA y recupera su dinero =  " << (apuestas[i]) << endl;
+		}
+		else if (crupier->suma() > jugadoresMesa_ptr[i]->suma() && blackJacks[i] != 1) {
 			cout << jugadoresMesa_ptr[i]->getNombre() << " PIERDE D: " << endl;
 		}
 		else if (blackJacks[i] == 1) {
-			cout << jugadoresMesa_ptr[i]->getNombre() << " GANA CON BLACKJACK : " << (apuestas[i] * 2) << endl;
+			cout << jugadoresMesa_ptr[i]->getNombre() << " GANA CON BLACKJACK! : " << (apuestas[i] * 2) << endl;
 			jugadoresMesa_ptr[i]->agregarSaldo((apuestas[i] * 2));
+			jugadoresMesa_ptr[i]->addVictoria();
 		}
 		else {
 			cout << jugadoresMesa_ptr[i]->getNombre() << " GANA : " << (apuestas[i] * 2) << endl;
 			jugadoresMesa_ptr[i]->agregarSaldo((apuestas[i] * 2));
+			jugadoresMesa_ptr[i]->addVictoria();
 		}
 		cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
 		cin.ignore();
@@ -429,6 +467,11 @@ void Sistema::jugar()
 
 
 }
+//despliega en orden los 10 jugadores con mas victorias(en caso de ser menos imprime menos)
+void Sistema::jugadoresOnfire()
+{
+}
+
 
 
 

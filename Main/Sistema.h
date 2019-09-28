@@ -32,6 +32,7 @@ private:
 	void isCartas();//revisa si hay cartas suficientes para jugar si nos las hay revuelve el mazo
 	void repartirA(Jugador* jugador_ptr);//reparte una carta de la lista de cartas a la direccion de jugador ingresado
 	void jugar();
+	void jugadoresOnfire();
 	
 	
 };

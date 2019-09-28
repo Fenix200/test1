@@ -61,7 +61,7 @@ int main()
 	juga->ingresarCarta(carta2);
 	juga->ingresarCarta(carta3);
 	
-	sis->printCarta(juga);
+	sis->ejecutarSistema();
 	
 
 }
