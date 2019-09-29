@@ -29,6 +29,7 @@ void Sistema::ejecutarSistema()
 	listaJugadores->getJugador(2).setSaldo(10000);
 	listaJugadores->getJugador(3).setSaldo(10000);
 	listaJugadores->getJugador(4).setSaldo(10000);
+	setUltimaIdPersona(3);
 	int ingreso_0 = -1;
 
 	//En el taller no indica que exista una opcion salir asi que while true
@@ -61,7 +62,9 @@ void Sistema::ejecutarSistema()
 
 			printMenus(3);
 			int ingreso_3 = verificadorIngreso(4);
-			//aca ira Registrar0
+			//aca ira configuracion
+			configuracion(ingreso_3);
+			
 			break;
 		}
 		default:
@@ -108,7 +111,7 @@ void Sistema::printMenus(float imprimir)
 	}
 
 }
-//pregunta hasta que se ingrese un valor valido
+//pregunta hasta que se ingrese un valor valido entre 0 y el valor indicado
 int Sistema::verificadorIngreso(int max)
 {
 	while (true) {
@@ -121,6 +124,26 @@ int Sistema::verificadorIngreso(int max)
 			cout << "Opcion no valida ingresa Numero!" << endl;
 		}
 		else if (opcion <= max && opcion >= 1) {
+			return opcion;
+		}
+		else {
+			cout << "Opcion no valida" << endl;
+		}
+	}
+}
+//este verificador de ingreso admite un valor minimo
+int Sistema::verificadorIngreso(int min, int max)
+{
+	while (true) {
+		int opcion;
+
+		cin >> opcion;
+		if (!cin) {
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cout << "Opcion no valida ingresa Numero!" << endl;
+		}
+		else if (opcion <= max && opcion >= min) {
 			return opcion;
 		}
 		else {
@@ -491,6 +514,122 @@ void Sistema::jugadoresOnfire()
 	cout << "\nPRESIONE ENTER PARA CONTINUAR" << endl;
 	cin.ignore();
 	getchar();
+}
+
+
+//submetodo de ejecutar sistema (apartado configuracion del programa
+void Sistema::configuracion(int opcion)
+{
+	//cargarsaldo
+	if (opcion == 1) {
+		system("cls");
+		cout << "Ingrese ID de Billetera para agregar saldo" << endl;
+		int id = verificadorIngreso(0,idActualPersona);
+		for (int i = 0; i < listaJugadores->getCantActual(); i++) {
+			if (id == listaJugadores->getJugador(i).getId()) {
+				system("cls");
+				cout << "ID ENCONTRADA :" << id << "\nIngrese monto a Cargar, recuerde que debe ser \nMayor que 1 mil y \nMenor que 100 mil\n\nMONTO = ";
+				int monto = verificadorIngreso(100000);
+				if (monto >= 1000) {
+					listaJugadores->getJugador(i).agregarSaldo(monto);
+					cout << "Saldo AGREGADO EXITOSAMENTE :D" << endl;
+					cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
+					cin.ignore();
+					getchar();
+					return;
+				}
+				else {
+					cout << "Saldo no puede ser menor a 1000, hasta luego" << endl;
+					cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
+					cin.ignore();
+					getchar();
+					return;
+				}	
+			}
+		}
+		cout << "ID NO ENCONTRADA" << endl;
+		cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
+		cin.ignore();
+		getchar();
+		return;
+	}
+	//consultar saldo
+	else if (opcion == 2) {
+		system("cls");
+		cout << "Ingrese ID de Billetera para consultar Saldo" << endl;
+		int id = verificadorIngreso(0,idActualPersona);
+		for (int i = 0; i < listaJugadores->getCantActual(); i++) {
+			if (id == listaJugadores->getJugador(i).getId()) {
+				cout << listaJugadores->getJugador(i).getNombre()<< " Rut = "<< listaJugadores->getJugador(i).getRut() << " Saldo actual = " << listaJugadores->getJugador(i).getSaldo()<<endl;
+				cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
+				cin.ignore();
+				getchar();
+				return;
+			}
+		}
+		cout << "ID NO ENCONTRADA" << endl;
+		cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
+		cin.ignore();
+		getchar();
+		return;
+	}
+	//registrar jugador
+	else if (opcion == 3) {
+		system("cls");
+		cout << "Ingrese Datos de nuevo jugador \n" << endl;
+		string rut;
+		cout << "\nIngrese RUT = "<<endl;
+		cin.ignore();
+		getline(cin, rut);
+		cin.ignore();	
+		if (listaJugadores->buscarJugador(rut) != -1) {
+			cout << "RUT YA EXISTE!!!"<<endl;
+			cin.ignore();
+			cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
+			_getch();
+			return;
+		}
+		string nombreNuevo;
+		cout << "\nIngrese Nombre = " << endl;
+		getline(cin, nombreNuevo);
+		cin.ignore();
+		listaJugadores->agregarJugador(nombreNuevo, rut, idActualPersona);
+		cout << "AGREGADO EXITOSAMENTE" << endl;
+		cout << "RUT = " << rut << "\nNOMBRE = " << nombreNuevo <<"\nID = "<< idActualPersona<< endl;
+		setUltimaIdPersona(idActualPersona);
+		cin.ignore();
+		cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
+		_getch();
+		return;
+
+	}
+	//editar nombre de jugador
+	else if (opcion == 4) {
+		system("cls");
+		cout << "Ingrese RUT DEL JUGADOR para cambiar su nombre de usuario \n" << endl;
+		string rut;
+		cout << "Ingrese rut = ";
+		cin.ignore();
+		getline(cin, rut);
+		if (listaJugadores->buscarJugador(rut) == -1) {
+			cout << "RUT NO ENCONTRADO" << endl;
+			cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
+			cin.ignore();
+			getchar();
+			return;
+		}
+
+		string nombreNuevo;
+		cout << "Ingrese Nombre Nuevo = ";
+		getline(cin, nombreNuevo);
+		cin.ignore();
+		listaJugadores->getJugador(rut).setNombre(nombreNuevo);
+		cout << "NOMBRE CAMBIADO\nPRESIONE ENTER PARA CONTINUAR" << endl;
+		cin.ignore();
+		getchar();
+		return;
+
+	}
 }
 
 

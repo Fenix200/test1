@@ -22,7 +22,9 @@ private:
 
 	void printMenus(float imprimirMenuNumero);
 	int verificadorIngreso(int max);
-	int idActualPersona;
+	int verificadorIngreso(int min,int max);
+	
+	int idActualPersona;//retorna la id actual
 	void iniciarPartida(int opcion);
 	ListaJugador* listaJugadores;
 	int jugadoresJugando;//indica cantidad de jugadores jugando en meza
@@ -33,6 +35,7 @@ private:
 	void repartirA(Jugador* jugador_ptr);//reparte una carta de la lista de cartas a la direccion de jugador ingresado
 	void jugar();
 	void jugadoresOnfire();
+	void configuracion(int opcion);
 	
 	
 };
