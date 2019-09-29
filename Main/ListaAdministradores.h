@@ -9,7 +9,7 @@ class ListaAdministradores
 {
 public:
 	ListaAdministradores();
-	bool agregarAdministrador(Administrador&);
+	bool agregarAdministrador(string rut, string clave);
 	bool buscarAdministrador(string rut, string clave);
 
 private:

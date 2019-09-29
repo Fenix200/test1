@@ -14,9 +14,10 @@ ListaAdministradores::ListaAdministradores() {
 
 }
 
-bool ListaAdministradores::agregarAdministrador(Administrador& adm) {
+bool ListaAdministradores::agregarAdministrador(string rut, string clave) {
+	Administrador* adm = new Administrador(rut, clave);
 	if (cantActual < cantMax) {
-		vectorAdministradores[cantActual] = adm;
+		vectorAdministradores[cantActual] = *adm;
 		cantActual++;
 		return true;
 	}

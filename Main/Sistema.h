@@ -6,6 +6,7 @@
 #include <conio.h>
 #include <chrono>
 #include <thread>
+#include "ListaAdministradores.h"
 
 
 using namespace std;
@@ -36,6 +37,11 @@ private:
 	void jugar();
 	void jugadoresOnfire();
 	void configuracion(int opcion);
+	ListaAdministradores* listaAdministradores;
+	void leerArchivos();
+	void leerAdmin();
+	void leerCartas();
+	void leerJugadores();
 	
 	
 };

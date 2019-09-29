@@ -5,6 +5,7 @@ Sistema::Sistema()
 	listaJugadores = new ListaJugador();
 	jugadoresJugando = 0;
 	jugadoresMesa_ptr = new Jugador*[6];
+	listaAdministradores = new ListaAdministradores();
 	//Crupier es un "jugador" en este caso la posicion 0 de la lista jugador
 	crupier = &(listaJugadores->getJugador("-9999"));
 	listaCartas = new ListaCartas();
@@ -21,6 +22,7 @@ void Sistema::setUltimaIdPersona(int id)
 //metodo para ejecutar sistema
 void Sistema::ejecutarSistema()
 {
+	listaAdministradores->agregarAdministrador("19467", "queso");
 	listaJugadores->agregarJugador("juan", "19467", 0);
 	listaJugadores->agregarJugador("pedro", "19467", 1);
 	listaJugadores->agregarJugador("diego", "19467", 2);
@@ -59,6 +61,25 @@ void Sistema::ejecutarSistema()
 			break;
 		}
 		case 3: {
+			string user;
+			string pass;
+			cout << "\nIngrese rut Administrador = ";
+			cin.ignore();
+			getline(cin, user);
+			cin.ignore();
+			cout << "\nIngrese contrasenna Administrador = ";
+			getline(cin,pass);
+			cin.ignore();
+
+			cout << user << " " << pass << endl;
+
+			if (!listaAdministradores->buscarAdministrador(user, pass)) {
+				cin.ignore();
+				cout << "RUT O CONTRASENNA INCORRECTOS" << endl;
+				cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
+				_getch();
+				break;
+			}
 
 			printMenus(3);
 			int ingreso_3 = verificadorIngreso(4);
@@ -633,9 +654,6 @@ void Sistema::configuracion(int opcion)
 }
 
 
-
-
-
 void Sistema::printCarta(Jugador* jug)
 {
 	if (jug->getCantidadCartasActuales() == 0) {
@@ -709,3 +727,21 @@ void Sistema::printCarta(Jugador* jug)
 	}
 }
 
+
+void Sistema::leerArchivos()
+{
+
+
+}
+
+void Sistema::leerAdmin()
+{
+}
+
+void Sistema::leerCartas()
+{
+}
+
+void Sistema::leerJugadores()
+{
+}
