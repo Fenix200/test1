@@ -15,6 +15,7 @@ public:
 	int buscarJugador(string rut);
 	int& getCantActual();
 	void quitarCartasJugadores();//les quita las cartas a los jugadores
+	void ordenarMayoraMenorJugadores();
 
 
 private:

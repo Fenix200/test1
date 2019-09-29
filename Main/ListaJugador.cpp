@@ -5,7 +5,7 @@ ListaJugador::ListaJugador() {
 	this->cantMax = 100;
 	this->cantActual = 1;
 	this->vectorJugadores = new Jugador[cantMax];
-	this->vectorJugadores[0] = Jugador("NULL", "-9999", -9999);
+	this->vectorJugadores[0] = Jugador("CRUPIER", "-9999", -9999);
 
 }
 //añade un nuevo jugador
@@ -58,5 +58,18 @@ void ListaJugador::quitarCartasJugadores()
 {
 	for (int i = 0; i < cantActual; i++) {
 		vectorJugadores[i].vaciarCartas();
+	}
+}
+// metodo para ordenar lita de vectores de mayor a menor (no altera las direcciones(ni las crea) de memoria solo modifica lo que contienen)
+void ListaJugador::ordenarMayoraMenorJugadores()
+{
+	for (int a = 0; a < (cantActual-1); a++) {
+		for (int b = a + 1; b < cantActual; b++) {
+			if ((vectorJugadores[a].getVictorias()) < (vectorJugadores[b].getVictorias())) {
+				Jugador aux = vectorJugadores[a];
+				vectorJugadores[a] = vectorJugadores[b];
+				vectorJugadores[b] = aux;
+			}
+		}
 	}
 }

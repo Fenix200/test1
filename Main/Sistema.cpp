@@ -470,6 +470,27 @@ void Sistema::jugar()
 //despliega en orden los 10 jugadores con mas victorias(en caso de ser menos imprime menos)
 void Sistema::jugadoresOnfire()
 {
+	listaJugadores->ordenarMayoraMenorJugadores();
+	int top10;
+	bool hayMasde10 = true;
+	if (listaJugadores->getCantActual() < 10) {
+		top10 = listaJugadores->getCantActual();
+		hayMasde10 = false;
+	}
+	else {
+		top10 = 10;
+	}
+	for (int i = 0; i < top10; i++) {
+		if (listaJugadores->getJugador(i).getNombre().compare("CRUPIER") != 0) {
+			cout << listaJugadores->getJugador(i).getNombre() << " Victorias = " << listaJugadores->getJugador(i).getVictorias() << endl;
+		}
+		else if(hayMasde10) {
+			top10++;
+		}
+	}
+	cout << "\nPRESIONE ENTER PARA CONTINUAR" << endl;
+	cin.ignore();
+	getchar();
 }
 
 
