@@ -5,9 +5,10 @@ Card::Card()
 	//nada aqui
 }
 
-Card::Card(std::string numero)
+Card::Card(std::string numero, std::string pinta)
 {
 	this->numero = numero;
+	this->pinta = pinta;
 }
 
 
@@ -15,4 +16,9 @@ Card::Card(std::string numero)
 std::string& Card::getNumero()
 {
 	return this->numero;
+}
+
+std::string& Card::getPinta()
+{
+	return pinta;
 }

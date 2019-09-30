@@ -4,6 +4,9 @@
 #include <cstdlib>
 #include <ctime>
 
+#include <iostream>
+#include <conio.h>
+
 using namespace std;
 
 class ListaCartas

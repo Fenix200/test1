@@ -4,7 +4,7 @@
 44444442,Eileen Quispe,4,67500,3
 5555555K,Simon Espinosa,5,100000,9
 66666669,Ignacio Carrasco,6,88000,10
-77777771,Way-Yeng Teran,7,22500,1
+77777771,Way-Yeng Teran,7,22500,2
 88888885,Carlos Pon,8,708500,51
 99999990,Paola Salgado,9,20000,2
 10111111K,Giovanna Berna,10,50500,9

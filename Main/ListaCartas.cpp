@@ -9,47 +9,80 @@ ListaCartas::ListaCartas()
 	cantMax = 52*mazos;//establece que habran 104 cartas 52*2 = 104
 	posCartas = new int[cantMax];
 	this->cartasFijas = new Card[cantMax];
+	
+	//cantidad de mazos
+	for (int a = 0; a < mazos; a++) {
+		//4 pintas
+		for (int b = 0; b < 4; b++) {
+			string pinta = "";
+			//corazon
+			if (b == 0) {
+				pinta = "Corazones";
+			}
+			//diamante
+			else if (b == 1) {
+				pinta = " Diamante";
+			}
+			//trebol
+			else if (b == 2) {
+				pinta = "  Trebol ";
+			}
+			//Pica
+			else {
+				pinta = "   Pica  ";
 
-	//llenado de numeros 2 a 10 (9 cartas * 4 pintas * 2 mazos =72)
-	for (int a = 0; a < 4*mazos; a++) {
-		for (int i = 2; i < 11; i++)
-		{
-			Card* carta = new Card(std::to_string(i));
-			cartasFijas[cartas] = *carta;
-			posCartas[cartas] = cartas;
-			cartas++;
+			}
+			//13 Cartas
+			for (int p = 0; p < 13; p++) {
+				
+				//AS
+				if (p == 0) {
+
+					Card* carta = new Card("A", pinta);	
+					cartasFijas[cartas] = *carta;
+					posCartas[cartas] = cartas;
+					cartas++;
+				}
+				//J
+				else if (p == 10) {
+					Card* carta = new Card("J", pinta);
+					cartasFijas[cartas] = *carta;
+					posCartas[cartas] = cartas;
+					cartas++;
+				}
+				//Q
+				else if (p == 11) {
+					Card* carta = new Card("Q", pinta);
+					cartasFijas[cartas] = *carta;
+					posCartas[cartas] = cartas;
+					cartas++;
+				}
+				//K
+				else if (p == 12) {
+					Card* carta = new Card("K", pinta);
+					cartasFijas[cartas] = *carta;
+					posCartas[cartas] = cartas;
+					cartas++;
+				}
+				//2,3,4,5,6,7,8,9,10
+				else {
+					Card* carta = new Card(std::to_string((p + 1)), pinta);
+					cartasFijas[cartas] = *carta;
+					posCartas[cartas] = cartas;
+					cartas++;
+				}
+
+
+			}
+
 		}
 	}
-	//llenando Ases 4 ases x 2 mazos = 8
-	for (int i = 0; i < 4*mazos; i++) {
-		Card* carta = new Card("A");
-		cartasFijas[cartas] = *carta;
-		posCartas[cartas] = cartas;
-		cartas++;
-	}
-	//llenando J Q y K
-	for (int i = 0; i < 4 * mazos; i++) {
-		Card* carta = new Card("J");
-		cartasFijas[cartas] = *carta;
-		posCartas[cartas] = cartas;
-		cartas++;
-	}
-	for (int i = 0; i < 4 * mazos; i++) {
-		Card* carta = new Card("Q");
-		cartasFijas[cartas] = *carta;
-		posCartas[cartas] = cartas;
-		cartas++;
-	}
-	for (int i = 0; i < 4 * mazos; i++) {
-		Card* carta = new Card("K");
-		cartasFijas[cartas] = *carta;
-		posCartas[cartas] = cartas;
-		cartas++;
-	}
+
 	//se le resta 1 ya que la variable cartas restantes se utiliza para ir buscando cartas
 	//y el vector cartas va desde 0 a 103(104-1 =103)
 	this->cartasRestantes = cartas-1;
 	resetearSemilla();
+
 }
 
 

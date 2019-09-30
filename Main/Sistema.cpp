@@ -688,7 +688,7 @@ void Sistema::printCarta(Jugador* jug)
 		}
 	}
 	for (int i = 0; i < cantidad; i++) {
-		cout << "|   UCN   |";
+		cout << "|"<<"         "<<"|";
 		if (i == cantidad - 1) {
 			cout<<" -->TOTAL = " << jug->suma();
 			cout << endl;
@@ -740,8 +740,9 @@ bool Sistema::leerAdmin(string nombreArchivo)
 	archivo.open(nombreArchivo.c_str(), ios::in); //Abrimos el archivo en modo lectura
 
 	if (archivo.fail()) {
-		cout << "No se pudo abrir el archivo"<<nombreArchivo;
-		return false;
+		cout << "No se pudo abrir el archivo "<<nombreArchivo;
+		_getch();
+		exit(1);
 	}
 	//Aca los datos a obtener linea por linea
 	while (!archivo.eof()) { //mientras no sea final del archivo
@@ -810,13 +811,15 @@ bool Sistema::leerJugadores(string nombreArchivo)
 		if (esPosibleInscribir) {
 			if (!listaJugadores->agregarJugador(nombre, rut, id, monto, partidasGanadas)) {
 				cout << "Error en linea: " << linea << " Del Archivo : " << nombreArchivo << endl;
+				_getch();
 			}
 		}
 		else {
 			cout << "Error en linea: " << linea << " Del Archivo : " << nombreArchivo << endl;
+			_getch();
 		}
 
-
+		linea++;
 	}
 
 	try {
