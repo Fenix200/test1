@@ -10,6 +10,7 @@ class ListaJugador
 public:
 	ListaJugador();
 	bool agregarJugador(string nombre, string rut, int id);
+	bool agregarJugador(string nombre, string rut, int id, int monto,int victorias);
 	Jugador& getJugador(string rut);
 	Jugador& getJugador(int posicion);
 	int buscarJugador(string rut);

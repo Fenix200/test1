@@ -10,7 +10,32 @@ ListaJugador::ListaJugador() {
 }
 //añade un nuevo jugador
 bool ListaJugador::agregarJugador(string nombre, string rut, int id) {
+
 	Jugador* jg = new Jugador(nombre, rut, id);
+	if (cantActual < cantMax) {
+		vectorJugadores[cantActual] = *jg;
+		cantActual++;
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool ListaJugador::agregarJugador(string nombre, string rut, int id, int monto, int victorias)
+{
+
+	//asi evitamos conflicto al inscribir rut o id
+	for (int i = 0; i < cantActual; i++) {
+		if (vectorJugadores[i].getId() == id) {
+			return false;
+		}
+		if (vectorJugadores[i].getRut().compare(rut) == 0) {
+			return false;
+		}
+	}
+	Jugador* jg = new Jugador(nombre, rut, id,monto,victorias);
+
 	if (cantActual < cantMax) {
 		vectorJugadores[cantActual] = *jg;
 		cantActual++;

@@ -5,6 +5,36 @@
 #include <string>
 #include "Sistema.h"
 
+#include<stdlib.h>
+#include<fstream>
+
+void lectura(string nombreArchivo) {
+	ifstream archivo;
+
+
+	archivo.open(nombreArchivo.c_str(), ios::in); //Abrimos el archivo en modo lectura
+
+	if (archivo.fail()) {
+		cout << "No se pudo abrir el archivo";
+		return;
+	}
+	//Aca los datos a obtener linea por linea
+	while (!archivo.eof()) { //mientras no sea final del archivo
+		/*
+		*Ej: 
+		* string dato1;
+		* string dato2;
+		* string dato3;
+		* getline(archivo, dato1, ',');
+		* getline(archivo, dato2, ',');
+		* getline(archivo, dato3);//note que sin "," ya que es el ultimo dato se supone entonces no es necesario mas
+		*/
+	}
+
+
+	archivo.close(); //Cerramos el archivo
+}
+
 void suma(int hola) {
 	cout << 5 + hola<<endl;
 }

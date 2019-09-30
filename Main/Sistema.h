@@ -7,6 +7,8 @@
 #include <chrono>
 #include <thread>
 #include "ListaAdministradores.h"
+#include<stdlib.h>
+#include<fstream>
 
 
 using namespace std;
@@ -38,10 +40,11 @@ private:
 	void jugadoresOnfire();
 	void configuracion(int opcion);
 	ListaAdministradores* listaAdministradores;
-	void leerArchivos();
-	void leerAdmin();
-	void leerCartas();
-	void leerJugadores();
+
+	bool leerArchivos();
+	bool leerAdmin(string nombreArchivo);
+	bool leerCartas(string nombreArchivo);
+	bool leerJugadores(string nombreArchivo);
 	
 	
 };

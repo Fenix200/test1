@@ -9,6 +9,7 @@ Sistema::Sistema()
 	//Crupier es un "jugador" en este caso la posicion 0 de la lista jugador
 	crupier = &(listaJugadores->getJugador("-9999"));
 	listaCartas = new ListaCartas();
+	leerArchivos();
 
 }
 void Sistema::setUltimaIdPersona(int id)
@@ -22,16 +23,6 @@ void Sistema::setUltimaIdPersona(int id)
 //metodo para ejecutar sistema
 void Sistema::ejecutarSistema()
 {
-	listaAdministradores->agregarAdministrador("19467", "queso");
-	listaJugadores->agregarJugador("juan", "19467", 0);
-	listaJugadores->agregarJugador("pedro", "19467", 1);
-	listaJugadores->agregarJugador("diego", "19467", 2);
-	listaJugadores->agregarJugador("pablo", "19467", 3);
-	listaJugadores->getJugador(1).setSaldo(10000);
-	listaJugadores->getJugador(2).setSaldo(10000);
-	listaJugadores->getJugador(3).setSaldo(10000);
-	listaJugadores->getJugador(4).setSaldo(10000);
-	setUltimaIdPersona(3);
 	int ingreso_0 = -1;
 
 	//En el taller no indica que exista una opcion salir asi que while true
@@ -524,9 +515,11 @@ void Sistema::jugadoresOnfire()
 	else {
 		top10 = 10;
 	}
+	int posicion = 1;
 	for (int i = 0; i < top10; i++) {
 		if (listaJugadores->getJugador(i).getNombre().compare("CRUPIER") != 0) {
-			cout << listaJugadores->getJugador(i).getNombre() << " Victorias = " << listaJugadores->getJugador(i).getVictorias() << endl;
+			cout <<"["<<posicion<<"] "<< listaJugadores->getJugador(i).getNombre() << " Victorias = " << listaJugadores->getJugador(i).getVictorias() << endl;
+			posicion++;
 		}
 		else if(hayMasde10) {
 			top10++;
@@ -728,20 +721,110 @@ void Sistema::printCarta(Jugador* jug)
 }
 
 
-void Sistema::leerArchivos()
+
+bool Sistema::leerArchivos()
 {
-
-
+	//leer admin es el archivo mas importante ya que si no es posible leerlo no es posible inscribir ni agregar saldo
+	if (!leerAdmin("admin.txt")) {
+		return false;
+	}
+	leerJugadores("jugadores.txt");
+	leerCartas("cartas.txt");
 }
 
-void Sistema::leerAdmin()
+bool Sistema::leerAdmin(string nombreArchivo)
 {
+	ifstream archivo;
+
+
+	archivo.open(nombreArchivo.c_str(), ios::in); //Abrimos el archivo en modo lectura
+
+	if (archivo.fail()) {
+		cout << "No se pudo abrir el archivo"<<nombreArchivo;
+		return false;
+	}
+	//Aca los datos a obtener linea por linea
+	while (!archivo.eof()) { //mientras no sea final del archivo
+
+		string rut;
+		string pass;
+		getline(archivo, rut, ',');
+		getline(archivo, pass);
+		listaAdministradores->agregarAdministrador(rut, pass);
+
+	}
+
+
+	archivo.close(); //Cerramos el archivo
+	return true;
 }
 
-void Sistema::leerCartas()
+bool Sistema::leerCartas(string nombreArchivo)
 {
+	return true;
 }
 
-void Sistema::leerJugadores()
+bool Sistema::leerJugadores(string nombreArchivo)
 {
+	int linea = 1;
+	int id;
+
+	ifstream archivo;
+
+
+	archivo.open(nombreArchivo.c_str(), ios::in); //Abrimos el archivo en modo lectura
+
+	if (archivo.fail()) {
+		cout << "No se pudo abrir el archivo" << nombreArchivo;
+		return false;
+	}
+	//Aca los datos a obtener linea por linea
+	while (!archivo.eof()) { //mientras no sea final del archivo
+
+		string rut;
+		string nombre;
+
+		string idString;
+		string montoString;
+		string partidasGanadasString;
+		
+		getline(archivo, rut, ',');
+		getline(archivo, nombre, ',');
+		getline(archivo, idString, ',');
+		getline(archivo, montoString, ',');
+		getline(archivo, partidasGanadasString);
+
+		int monto;
+		int partidasGanadas;
+
+		bool esPosibleInscribir = true;
+		try {
+			id = stoi(idString);
+			monto = stoi(montoString);
+			partidasGanadas = stoi(partidasGanadasString);
+
+		}
+		catch (...) {
+			esPosibleInscribir = false;
+		}
+		if (esPosibleInscribir) {
+			if (!listaJugadores->agregarJugador(nombre, rut, id, monto, partidasGanadas)) {
+				cout << "Error en linea: " << linea << " Del Archivo : " << nombreArchivo << endl;
+			}
+		}
+		else {
+			cout << "Error en linea: " << linea << " Del Archivo : " << nombreArchivo << endl;
+		}
+
+
+	}
+
+	try {
+		setUltimaIdPersona(id);
+	}
+	catch(...){
+
+	}
+	archivo.close(); //Cerramos el archivo
+	return true;
 }

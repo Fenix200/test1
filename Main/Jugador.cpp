@@ -1,6 +1,19 @@
 #include "Jugador.h"
 
 
+Jugador::Jugador(string nombre, string rut, int id, int monto, int _victorias)
+{
+	this->nombre = nombre;
+	this->rut = rut;
+	this->id = id;
+	this->victorias = _victorias;
+	this->saldo = monto;
+	cantMaxcartas = 21;
+	cantActualcartas = 0;
+	this->vecCartas_ptr = new std::string * [cantMaxcartas];
+
+}
+
 Jugador::Jugador(string nombre, string rut, int id)
 {
 	this->nombre = nombre;
@@ -97,6 +110,7 @@ string** Jugador::getListaCartas2()
 {
 	return vecCartas_ptr;
 }
+
 
 //Metodo que suma las cartas del jugador tomando en cuenta que valor del A a conveniencia y retorna -1 si es mayor a 21
 int Jugador::suma(){
