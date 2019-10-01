@@ -95,17 +95,6 @@ void Jugador::vaciarCartas()
 	this->cantActualcartas = 0;
 }
 
-/*borrar este metodo
-string* Jugador::getListaCartas()
-{
-	string* lista = new string[cantActualcartas];
-	for (int i = 0; i < cantActualcartas; i++) {
-		lista[i] = *vecCartas_ptr[i];
-	}
-
-	return lista;
-}*/
-
 string** Jugador::getListaCartas2()
 {
 	return vecCartas_ptr;

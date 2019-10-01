@@ -54,6 +54,7 @@ void Sistema::ejecutarSistema()
 		case 3: {
 			string user;
 			string pass;
+			cout << "\nINGRESE CON DOBLE ENTER\n"<<endl;
 			cout << "\nIngrese rut Administrador = ";
 			cin.ignore();
 			getline(cin, user);
@@ -115,7 +116,7 @@ void Sistema::printMenus(float imprimir)
 	if (imprimir == 3) {
 		system("cls");
 		cout << "Ingrese alguna opcion\n" << endl;
-		cout << "[1] Cargar Saldo a la billetera electrónica" << endl;
+		cout << "[1] Cargar Saldo a la billetera electronica" << endl;
 		cout << "[2] Consultar Saldo" << endl;
 		cout << "[3] Registrar Jugador" << endl;
 		cout << "[4] Editar Jugador" << endl;
@@ -202,7 +203,7 @@ void Sistema::iniciarPartida(int opcion)
 		cout << "Ingrese ID : " << endl;
 		getline(cin, id);
 
-		cout << "Ingrese NOMBRE : " << endl;
+		cout << "Ingrese NOMBRE (Se diferencia entre mayusculas y minusculas) : " << endl;
 		getline(cin, nombre);
 
 		if(listaJugadores->buscarJugador(rut) != -1){
@@ -256,7 +257,7 @@ void Sistema::iniciarPartida(int opcion)
 	{
 		system("cls");
 		if (jugadoresJugando == 0) {
-			cout << "Nadie para eliminar D:" << endl;
+			cout << "0 jugando Nadie para eliminar D:" << endl;
 			cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
 			cin.ignore();
 			getchar();
@@ -270,6 +271,7 @@ void Sistema::iniciarPartida(int opcion)
 			break;
 		}
 		string rut = "";
+		cin.ignore();
 		cout << "Ingrese RUT : " << endl;
 		getline(cin, rut);
 		//Buscar Jugador en meza
@@ -280,16 +282,16 @@ void Sistema::iniciarPartida(int opcion)
 			}
 		}
 		if (pos == -1) {
-			cout << "Nadie para eliminar D:" << endl;
+			cout << "Nadie encontrado para eliminar D:" << endl;
 			cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
 			cin.ignore();
 			getchar();
 			break;
 		}
 		//ahora si se encontro un jugador en mesa
-		jugadoresMesa_ptr[pos] = jugadoresMesa_ptr[jugadoresJugando];
+		jugadoresMesa_ptr[pos] = jugadoresMesa_ptr[(jugadoresJugando-1)];
 		jugadoresJugando--;
-		cout << "Eliminado" << endl;
+		cout << "Eliminado a " <<rut<< endl;
 		cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
 		cin.ignore();
 		getchar();
@@ -334,35 +336,35 @@ void Sistema::jugar()
 {
 
 	//verificar primero que todos tengan saldo
-
-	for (int i = 0; i < jugadoresJugando; i++) {
-		if (jugadoresMesa_ptr[i]->getSaldo() <= 0) {
-			cout << "Jugador : " << jugadoresMesa_ptr[i]->getNombre() << " No tiene saldo Para Continuar" << endl;
-			jugadoresMesa_ptr[i] = jugadoresMesa_ptr[jugadoresJugando];
-			jugadoresJugando--;
-			cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
-			cin.ignore();
-			getchar();
-		}
-	}
-
 	if (jugadoresJugando == 0) {
 		cout << "NADIE TIENE SALDO!" << endl;
 		return;
 	}
 
+
 	int apuestas[6] = { 0,0,0,0,0,0 };
 	int blackJacks[6] = { 0,0,0,0,0,0 };
 	int retirados[6] = { 0,0,0,0,0,0 };
+	int derrotados = 0;
+	int cantRetirados = 0;
+	bool retirarse = true;
 
 	for (int i = 0; i < jugadoresJugando; i++) {
 		system("cls");
 		cout << "Bienvenido A BlackJack UCN, Porfavor haga su apuesta : " << endl;
 		cout << "JUGADOR : " << jugadoresMesa_ptr[i]->getNombre() << endl;
 		cout << "SALDO : " << jugadoresMesa_ptr[i]->getSaldo() << endl;
+		if (jugadoresMesa_ptr[i]->getSaldo()==0) {
+			cout << "JUGADOR: "<< jugadoresMesa_ptr[i]->getNombre()<<" ID: "<< jugadoresMesa_ptr[i] ->getId()<<" RUT: "<< jugadoresMesa_ptr[i] ->getRut()<< endl;
+			cout << "SIN SALDO!!! PARA CONTINUAR, Debe Eliminarlo de la mesa :D, hasta pronto" << endl;
+			cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
+			cin.ignore();
+			getchar();
+			return;
+		}
 		cout << "Mi APuesta Es : " << endl;
 		apuestas[i] = verificadorIngreso(jugadoresMesa_ptr[i]->getSaldo());
-		jugadoresMesa_ptr[i]->setSaldo((jugadoresMesa_ptr[i]->getSaldo()) - apuestas[i]);//quitando saldo
+
 
 	}
 	system("cls");
@@ -381,6 +383,8 @@ void Sistema::jugar()
 			printCarta(crupier);
 			cout << "\n.:: CARTAS DE "<< jugadoresMesa_ptr[i]->getNombre() << "::." << endl;
 			if (inicio == 0) {
+				jugadoresMesa_ptr[i]->setSaldo((jugadoresMesa_ptr[i]->getSaldo()) - apuestas[i]);//quitando saldo
+				retirarse = true;
 				jugadoresMesa_ptr[i]->ingresarCarta(listaCartas->getCarta());
 				jugadoresMesa_ptr[i]->ingresarCarta(listaCartas->getCarta());
 				if (jugadoresMesa_ptr[i]->suma() == 21) {
@@ -399,12 +403,20 @@ void Sistema::jugar()
 			cout << "Quieres Sacar una Carta Adicional? : " << endl;
 			cout << "[1] SI" << endl;
 			cout << "[2] NO" << endl;
-			cout << "[3] Me retiro" << endl;
+			if (crupier->suma() != 11 && retirarse) {
+				cout << "[3] Me retiro" << endl;
+			
 			opcion = verificadorIngreso(3);
+			}
+			else {
+				opcion = verificadorIngreso(2);
+			}
 			if (opcion == 1) {
 				jugadoresMesa_ptr[i]->ingresarCarta(listaCartas->getCarta());
+				retirarse = false;
 			}
 			if (jugadoresMesa_ptr[i]->suma() == 21) {
+				system("cls");
 				cout << "GANASTE!" << endl;
 				printCarta(jugadoresMesa_ptr[i]);
 				cout << "GANASTE!" << endl;
@@ -415,6 +427,7 @@ void Sistema::jugar()
 			}
 			if (jugadoresMesa_ptr[i]->suma() == -1) {
 				cout << "Tienes Mas de 21 " << jugadoresMesa_ptr[i]->getNombre() <<" D:"<< endl;
+				derrotados++;
 				printCarta(jugadoresMesa_ptr[i]);
 				retirados[i] = 1;
 				cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
@@ -430,10 +443,33 @@ void Sistema::jugar()
 			if (opcion == 3) {
 				jugadoresMesa_ptr[i]->setSaldo((jugadoresMesa_ptr[i]->getSaldo()) + (apuestas[i]/2));
 				retirados[i] = 2;
+				cantRetirados++;
 				break;
 			}
 
 		} while (true);
+	}
+
+	if ((cantRetirados + derrotados) == jugadoresJugando) {
+		for (int i = 0; i < jugadoresJugando; i++) {
+			system("cls");
+
+
+			if (retirados[i] == 2) {
+				double saldo = (apuestas[i] / 2);
+				cout << jugadoresMesa_ptr[i]->getNombre() << " SE RETIRO y recupera la mitad =  " << saldo << endl;
+			}
+			else {
+				cout << jugadoresMesa_ptr[i]->getNombre() << " PIERDE D: " << endl;
+			}
+			cout << "PRESIONE ENTER PARA CONTINUAR" << endl;
+			cin.ignore();
+			getchar();
+		}
+		cout << "Fin de partida \nPRESIONE ENTER PARA CONTINUAR" << endl;
+		cin.ignore();
+		getchar();
+		return;
 	}
 	system("cls");
 	cout << "Turno Del CRUPIER" << endl;
@@ -481,7 +517,7 @@ void Sistema::jugar()
 			jugadoresMesa_ptr[i]->agregarSaldo((apuestas[i]));
 			cout << jugadoresMesa_ptr[i]->getNombre() << " EMPATA y recupera su dinero =  " << (apuestas[i]) << endl;
 		}
-		else if (crupier->suma() > jugadoresMesa_ptr[i]->suma() && blackJacks[i] != 1) {
+		else if (crupier->suma() > jugadoresMesa_ptr[i]->suma()) {
 			cout << jugadoresMesa_ptr[i]->getNombre() << " PIERDE D: " << endl;
 		}
 		else if (blackJacks[i] == 1) {
@@ -590,7 +626,7 @@ void Sistema::configuracion(int opcion)
 	//registrar jugador
 	else if (opcion == 3) {
 		system("cls");
-		cout << "Ingrese Datos de nuevo jugador \n" << endl;
+		cout << "Ingrese Datos de nuevo jugador (Ingrese con DOBLE ENTER) \n" << endl;
 		string rut;
 		cout << "\nIngrese RUT = "<<endl;
 		cin.ignore();
@@ -688,7 +724,7 @@ void Sistema::printCarta(Jugador* jug)
 		}
 	}
 	for (int i = 0; i < cantidad; i++) {
-		cout << "|"<<"         "<<"|";
+		cout << "|"<<"   UCN   "<<"|";
 		if (i == cantidad - 1) {
 			cout<<" -->TOTAL = " << jug->suma();
 			cout << endl;
@@ -729,7 +765,6 @@ bool Sistema::leerArchivos()
 		return false;
 	}
 	leerJugadores("jugadores.txt");
-	leerCartas("cartas.txt");
 }
 
 bool Sistema::leerAdmin(string nombreArchivo)
@@ -760,15 +795,11 @@ bool Sistema::leerAdmin(string nombreArchivo)
 	return true;
 }
 
-bool Sistema::leerCartas(string nombreArchivo)
-{
-	return true;
-}
-
 bool Sistema::leerJugadores(string nombreArchivo)
 {
 	int linea = 1;
 	int id;
+	int idFinal = -9999;
 
 	ifstream archivo;
 
@@ -803,6 +834,10 @@ bool Sistema::leerJugadores(string nombreArchivo)
 			id = stoi(idString);
 			monto = stoi(montoString);
 			partidasGanadas = stoi(partidasGanadasString);
+			//la ultima id sera siempre la mayor
+			if (id > idFinal) {
+				idFinal = id;
+			}
 
 		}
 		catch (...) {
@@ -823,7 +858,7 @@ bool Sistema::leerJugadores(string nombreArchivo)
 	}
 
 	try {
-		setUltimaIdPersona(id);
+		setUltimaIdPersona(idFinal);
 	}
 	catch(...){
 

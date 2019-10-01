@@ -43,7 +43,6 @@ private:
 
 	bool leerArchivos();
 	bool leerAdmin(string nombreArchivo);
-	bool leerCartas(string nombreArchivo);
 	bool leerJugadores(string nombreArchivo);
 	
 	
